@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2007 The Android Open Source Project
  *
@@ -155,6 +154,8 @@ class BrowserSettings extends Observable {
             "CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 " +
             "(KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16";
 
+    private static final String IE6_USERAGENT = "Mozilla/4.0 (compatible; MSIE 6.1; Windows XP)";
+
     // Value to truncate strings when adding them to a TextView within
     // a ListView
     public final static int MAX_TEXTVIEW_LEN = 80;
@@ -193,6 +194,8 @@ class BrowserSettings extends Observable {
                 s.setUserAgentString(DESKTOP_USERAGENT);
             } else if (b.userAgent == 2) {
                 s.setUserAgentString(IPHONE_USERAGENT);
+            } else if (b.userAgent == 3) {
+                s.setUserAgentString(IE6_USERAGENT);
             }
             s.setUseWideViewPort(b.useWideViewPort);
             s.setLoadsImagesAutomatically(b.loadsImagesAutomatically);
@@ -330,6 +333,7 @@ class BrowserSettings extends Observable {
         zoomDensity = WebSettings.ZoomDensity.valueOf(
                 p.getString(PREF_DEFAULT_ZOOM, zoomDensity.name()));
         autoFitPage = p.getBoolean("autofit_pages", autoFitPage);
+        userAgent = Integer.parseInt(p.getString("web_user_agent", "0"));
         loadsPageInOverviewMode = p.getBoolean("load_page",
                 loadsPageInOverviewMode);
         boolean landscapeOnlyTemp =
