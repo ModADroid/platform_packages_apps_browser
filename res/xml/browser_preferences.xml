@@ -108,7 +108,7 @@
 
         <CheckBoxPreference
                 android:key="invert_color"
-                android:defaultValue="false"
+                android:defaultValue="true"
                 android:title="@string/pref_content_invert_color"
                 android:summary="@string/pref_content_invert_color_summary" />
 
