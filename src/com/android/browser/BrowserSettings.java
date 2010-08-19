@@ -106,6 +106,7 @@ class BrowserSettings extends Observable {
         WebSettings.LayoutAlgorithm.NARROW_COLUMNS;
     private boolean useWideViewPort = true;
     private int userAgent = 0;
+    private String customUserAgent = "";
     private boolean tracing = false;
     private boolean lightTouch = false;
     private boolean navDump = false;
@@ -145,6 +146,7 @@ class BrowserSettings extends Observable {
             "default_text_encoding";
     public final static String PREF_CLEAR_GEOLOCATION_ACCESS =
             "privacy_clear_geolocation_access";
+    public final static String PREF_CUSTOM_USER_AGENT = "custom_user_agent";
 
     private static final String DESKTOP_USERAGENT = "Mozilla/5.0 (Macintosh; " +
             "U; Intel Mac OS X 10_5_7; en-us) AppleWebKit/530.17 (KHTML, " +
@@ -196,6 +198,8 @@ class BrowserSettings extends Observable {
                 s.setUserAgentString(IPHONE_USERAGENT);
             } else if (b.userAgent == 3) {
                 s.setUserAgentString(IE6_USERAGENT);
+            } else {
+                s.setUserAgentString(b.customUserAgent);
             }
             s.setUseWideViewPort(b.useWideViewPort);
             s.setLoadsImagesAutomatically(b.loadsImagesAutomatically);
@@ -334,6 +338,8 @@ class BrowserSettings extends Observable {
                 p.getString(PREF_DEFAULT_ZOOM, zoomDensity.name()));
         autoFitPage = p.getBoolean("autofit_pages", autoFitPage);
         userAgent = Integer.parseInt(p.getString("web_user_agent", "0"));
+        customUserAgent = p.getString("custom_user_agent", "");
+        
         loadsPageInOverviewMode = p.getBoolean("load_page",
                 loadsPageInOverviewMode);
         boolean landscapeOnlyTemp =
